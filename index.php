@@ -30,6 +30,13 @@ desarrollo para obtener información sobre los errores
 
 $app = new \Slim\App(["settings" => $config]);
 
+$mdAuth = function ( $request, $response , $next) {
+    $token = $request->getHeader('token');
+    if(AutentificadorJWT::verificarToken($token[0])){
+        $response = $next($request,$response);
+    }
+    return $response;  
+};
 
 $app->get('[/]', function (Request $request, Response $response) {    
     $response->getBody()->write("GET => Bienvenido!!! ,a SlimFramework");
@@ -72,16 +79,17 @@ $app->post('/agregarCliente',function($request,$response){
 
 //TRAER TODOS LOS CLIENTES *************************/
 $app->get('/traerTodosLosClientes',function ($request,$response){
-
+    $response->write(cliente::traerTodosLosClientes());
+    /*
     $token = $request->getHeader('token');
     if(AutentificadorJWT::verificarToken($token[0])){
         $response->write(cliente::traerTodosLosClientes());
         //$newResponse = $response->withJson($header, 200); 
         //$newRespnse = $response->withJson(AutentificadorJWT::ObtenerPayLoad($token[0]));
     }  
-
+    */
     return $response;
-});
+})->add($mdAuth);
 
 //TRAER CLIENTE POR ID *************************/
 $app->post('/traerClientePorId',function ($request,$response){
