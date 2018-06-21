@@ -7,8 +7,10 @@ class Viaje {
     private $_id_cliente;
     private $_id_chofer;
     private $_id_vehiculo;
-    private $_direccion_inicio;
-    private $_direccion_destino;
+    private $_latitud_inicio;
+    private $_longitud_inicio;
+    private $_latitud_destino;
+    private $_longitud_destino;
     private $_puntaje_chofer;
     private $_puntaje_vehiculo;
     private $_puntaje_cliente;
@@ -16,20 +18,22 @@ class Viaje {
     private $_forma_pago;
 
     //AGREGAR Viaje
-    public static function agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago)
+    public static function agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$_latitud_inicio,$_longitud_inicio,$_latitud_destino,$_longitud_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago)
     {
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
-        viajes (id_encargado,id_cliente,id_chofer,id_vehiculo,direccion_inicio,direccion_destino,puntaje_chofer,puntaje_vehiculo,puntaje_cliente,estado,forma_pago)
-        values(:id_encargado,:id_cliente,:id_chofer,:id_vehiculo,:direccion_inicio,:direccion_destino,:puntaje_chofer,:puntaje_vehiculo,:puntaje_cliente,:estado,:forma_pago)");
+        viajes (id_encargado,id_cliente,id_chofer,id_vehiculo,puntaje_chofer,puntaje_vehiculo,puntaje_cliente,estado,forma_pago,latitud_inicio,longitud_inicio,latitud_destino,longitud_destino)
+        values(:id_encargado,:id_cliente,:id_chofer,:id_vehiculo,:puntaje_chofer,:puntaje_vehiculo,:puntaje_cliente,:estado,:forma_pago,:latitud_inicio,:longitud_inicio,:latitud_destino,:longitud_destino )");
 
         $consulta->bindValue(':id_encargado',$id_encargado);
         $consulta->bindValue(':id_cliente', $id_cliente);
         $consulta->bindValue(':id_chofer',$id_chofer);
         $consulta->bindValue(':id_vehiculo', $id_vehiculo);
-        $consulta->bindValue(':direccion_inicio', $direccion_inicio);
-        $consulta->bindValue(':direccion_destino',$direccion_destino);
+        $consulta->bindValue(':latitud_inicio', $latitud_inicio);
+        $consulta->bindValue(':longitud_inicio', $longitud_inicio);
+        $consulta->bindValue(':latitud_destino', $latitud_destino);
+        $consulta->bindValue(':longitud_destino', $longitud_destino);
         $consulta->bindValue(':puntaje_chofer',$puntaje_chofer);
         $consulta->bindValue(':puntaje_vehiculo',$puntaje_vehiculo);
         $consulta->bindValue(':puntaje_cliente',$puntaje_cliente);
