@@ -61,7 +61,13 @@ $app->post('/leerHeader', function (Request $request, Response $response) {
 
 
 //************ CLIENTES ************//
-
+$app->post('/login',function($request,$response){
+    $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $newResponse = $response->withJson(usuario::login($mail,$password)); 
+    return $newResponse;
+});
 //AGREGAR CLIENTE  *************************/
 $app->post('/agregarCliente',function($request,$response){
     $datos = $request->getParsedBody();
@@ -393,18 +399,7 @@ $app->post('/borrarEncargado',function ($request,$response){
 ///////////////////////////////////////////////////////////////////////
 //************ USUARIOS ************//
 
-//AGREGAR USUARIO  *************************/
-$app->post('/agregarUsuario',function($request,$response){
-    $datos = $request->getParsedBody();
-    $mail = $datos['mail'];
-    $password = $datos['password'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $tipo = $datos['tipo'];
-    $response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo));
-});
+
 
 //TRAER TODOS LOS USUARIOS *************************/
 $app->get('/traerTodosLosUsuarios',function ($request,$response){
@@ -515,20 +510,25 @@ $app->post('/borrarVehiculo',function ($request,$response){
 //AGREGAR Viaje  *************************/
 $app->post('/agregarViaje',function($request,$response){
     $datos = $request->getParsedBody();
-    $id_encargado = $datos['id_encargado'];
-    $id_cliente = $datos['id_cliente'];
-    $id_chofer = $datos['id_chofer'];
-    $id_vehiculo = $datos['id_vehiculo'];
-    $latitud_inicio = $datos['latitud_inicio'];
-    $longitud_inicio = $datos['longitud_inicio'];
-    $latitud_destino = $datos['latitud_destino'];
-    $longitud_destino =$datos['longitud_destino'];
-    $puntaje_chofer = $datos['puntaje_chofer'];
-    $puntaje_vehiculo = $datos['puntaje_vehiculo'];
-    $puntaje_cliente = $datos['puntaje_cliente'];
-    $estado = $datos['estado'];
-    $forma_pago = $datos['forma_pago'];
-    $response->write(Viaje::agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$_latitud_inicio,$longitud_inicio,$latitud_destino,$longitud_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
+    $idE = $datos['id_encargado'];
+    $idC = $datos['id_cliente'];
+    $idCho = $datos['id_chofer'];
+    $idV = $datos['id_vehiculo'];
+
+    $latIn = $datos['latitud_inicio'];
+    $lonIn = $datos['longitud_inicio'];
+    $latDest = $datos['latitud_destino'];
+    $lonDest =$datos['longitud_destino'];
+
+    $formaPago = $datos['forma_pago'];
+    $formaPago = $datos['fecha'];
+    $formaPago = $datos['estado'];
+    $formaPago = $datos['distancia'];
+    $formaPago = $datos['costo'];
+    $formaPago = $datos['inicio'];
+    $formaPago = $datos['destino'];
+
+    $response->write(Viaje::agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha));
 });
 
 //TRAER TODOS LOS viajes *************************/
