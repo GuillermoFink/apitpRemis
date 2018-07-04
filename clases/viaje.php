@@ -49,7 +49,7 @@ class Viaje {
     }
     */
     public static function agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha){
-        $rta = false;
+        $rta = "error";
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
         viajes (id_encargado,id_cliente,id_chofer,id_vehiculo,distancia,estado,costo,forma_pago,latitud_inicio,longitud_inicio,latitud_destino,longitud_destino,inicio,destino,fecha)
