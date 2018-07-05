@@ -544,7 +544,33 @@ $app->post('/traerViajePorId',function ($request,$response){
     return $response;
 });
 
+$app->post('/traerViajesPorChofer',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerViajesPorChofer($id));
+    return $response;
+});
+
+$app->post('/traerViajesPorCliente',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerViajesPorCliente($id));
+    return $response;
+});
+
+
 //MODIFICAR Viaje *************************/
+$app->post('/modificarViaje',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $estado = $datos['estado'];
+    $response->write(Viaje::modificarViaje($id,$estado));
+
+    return $response;
+});
+
+
+/*
 $app->post('/modificarViaje',function($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
@@ -563,6 +589,10 @@ $app->post('/modificarViaje',function($request,$response){
 
     return $response;
 });
+
+*/
+
+
 
 //BORRAR Viaje *************************/
 $app->post('/borrarViaje',function ($request,$response){

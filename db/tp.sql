@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-07-2018 a las 00:31:53
--- Versión del servidor: 10.1.19-MariaDB
--- Versión de PHP: 5.6.28
+-- Tiempo de generación: 05-07-2018 a las 05:46:41
+-- Versión del servidor: 10.1.24-MariaDB
+-- Versión de PHP: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -247,7 +249,7 @@ CREATE TABLE `viajes` (
   `id_cliente` int(11) NOT NULL,
   `id_chofer` int(11) NOT NULL,
   `id_vehiculo` int(11) NOT NULL,
-  `distancia` int(11) NOT NULL,
+  `distancia` varchar(11) NOT NULL,
   `estado` int(11) NOT NULL,
   `costo` int(11) NOT NULL,
   `forma_pago` int(11) NOT NULL,
@@ -265,9 +267,11 @@ CREATE TABLE `viajes` (
 --
 
 INSERT INTO `viajes` (`id_viaje`, `id_encargado`, `id_cliente`, `id_chofer`, `id_vehiculo`, `distancia`, `estado`, `costo`, `forma_pago`, `latitud_inicio`, `longitud_inicio`, `latitud_destino`, `longitud_destino`, `inicio`, `destino`, `fecha`) VALUES
-(4, 1, 10, 3, 5, 17, 1, 490, 1, -34.7206336, -58.2546051, -34.6677742, -58.3513222, 'Avenida Mitre 593, Quilmes, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', '2018-07-04 22:00:35'),
-(5, 1, 10, 1, 3, 3, 1, 70, 1, -34.7521695, -58.4096427, -34.7639649, -58.4029187, 'José María Penna 598, B1832BXL Lomas de Zamora, Buenos Aires, Argentina', 'Av. Colombres 389, B1832JAE Lomas de Zamora, Buenos Aires, Argentina', '2018-07-04 22:07:24'),
-(6, 1, 10, 1, 3, 1, 1, 70, 1, -34.7591711, -58.4016234, -34.7628527, -58.4117254, 'Mariano Boedo 343, B1832HRG Lomas de Zamora, Buenos Aires, Argentina', 'Av. Colombres 989, B1832JAR Lomas de Zamora, Buenos Aires, Argentina', '2018-07-04 22:22:09');
+(4, 1, 10, 3, 5, '17 km', 1, 490, 1, -34.7206336, -58.2546051, -34.6677742, -58.3513222, 'Avenida Mitre 593, Quilmes, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', '2018-07-04 22:00:35'),
+(5, 1, 10, 1, 3, '3 km', 1, 70, 1, -34.7521695, -58.4096427, -34.7639649, -58.4029187, 'José María Penna 598, B1832BXL Lomas de Zamora, Buenos Aires, Argentina', 'Av. Colombres 389, B1832JAE Lomas de Zamora, Buenos Aires, Argentina', '2018-07-04 22:07:24'),
+(6, 1, 10, 1, 3, '1 km', 1, 70, 1, -34.7591711, -58.4016234, -34.7628527, -58.4117254, 'Mariano Boedo 343, B1832HRG Lomas de Zamora, Buenos Aires, Argentina', 'Av. Colombres 989, B1832JAR Lomas de Zamora, Buenos Aires, Argentina', '2018-07-04 22:22:09'),
+(7, 1, 10, 1, 3, '1 km', 1, 70, 1, -34.606668, -58.416264, -34.6014677, -58.414178, 'Billinghurst 309, C1174ABE CABA, Argentina', 'Sánchez de Bustamante 772, C1173ABN CABA, Argentina', '2018-07-05 03:14:40'),
+(8, 1, 10, 1, 3, '18.7 km', 1, 550, 1, -34.7206336, -58.2546051, -34.7476749, -58.4144674, 'Avenida Mitre 593, Quilmes, Buenos Aires, Argentina', 'Las Heras 1352, Lomas de Zamora, Buenos Aires, Argentina', '2018-07-05 03:34:48');
 
 --
 -- Índices para tablas volcadas
@@ -368,7 +372,8 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `viajes`
 --
 ALTER TABLE `viajes`
-  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

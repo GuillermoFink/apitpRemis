@@ -81,7 +81,7 @@ class Viaje {
     public static function traerTodosLosviajes()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes ORDER BY fecha DESC");
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
@@ -99,6 +99,19 @@ class Viaje {
     }
 
    //MODIFICAR Viaje
+    public static function modificarViaje($id,$estado){
+        $rta = "error";
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `viajes` 
+        SET estado = :estado WHERE id = :id");
+        $consulta->bindValue(':id',$id);
+        $consulta->bindValue(':estado',$estado);
+        if ($consulta->execute()){
+            $rta = true;
+        }
+        return $rta;
+    }
+/*
     public static function modificarViaje($id,$id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago){
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -134,7 +147,7 @@ class Viaje {
         }
         return $rta;
     }
-
+*/
     //BORRAR Viaje
     public static function borrarViaje($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -145,5 +158,24 @@ class Viaje {
         return json_encode($datos);     
     }
  
+    public static function traerViajesPorChofer($id)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes WHERE id_chofer=:id ORDER BY fecha DESC");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($datos);     
+    }
+
+    public static function traerViajesPorCliente($id)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes WHERE id_cliente=:id ORDER BY fecha DESC");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($datos);     
+    }
 }
 ?>
